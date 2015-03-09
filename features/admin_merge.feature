@@ -4,8 +4,9 @@ Feature: Admin can merge articles
 	I want to be able to merge two articles
 
 Background: articles have been added to database
-
-	Given I have following articles in the database: "Article1", "Article2"
+	
+	Given the blog is set up
+	And I have following articles in the database: Article1, Article2
 	And I am an admin
 	And I am on the edit page for "Article1"
 
@@ -20,7 +21,7 @@ Scenario: the merged article should contain the text and comments of both articl
  	And I should see the title of "Article1" or "Article2"
  	And I should see the author of either "Article1" or "Article2"
 
-Sceneario: Admin should not be able to merge an article with non-existing article
+Scenario: Admin should not be able to merge an article with non-existing article
  	And I fill in "Article ID" with Article3 ID"
  	And I press "Merge"
  	Then I should be on the edit page for "Article1"
