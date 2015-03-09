@@ -6,7 +6,7 @@ Feature: Non-admin cannot merge articles
 Background: articles have been added to database
 
 	Given the blog is set up
-	And I have following article in the database: Article1
+	And I have following articles in the database: Article1
 
 Scenario: Publisiher should not see merge option
 	Given I created an account for publisher

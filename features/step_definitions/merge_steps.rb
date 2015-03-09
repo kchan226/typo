@@ -41,6 +41,10 @@ Given /^I am logged in as (.*)$/ do |user_type|
 end
 
 
-Then /^I should (not )?see "(.*)" button$/ do |button|
-	page.should have_selector("input[type=submit][value='Merge']")
+Then /^I should (not )?see "(.*)" button$/ do |should_not, button|
+	if should_not.nil?
+		page.should have_selector("input[type=submit][value='Merge']")
+	else
+		page.should have_no_selector("input[type=submit][value='Merge']")
+	end
 end
