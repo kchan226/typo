@@ -19,3 +19,4 @@ Scenario: Contributor should not see merge option
 	And I am logged in as contributor
 	When I am on the edit page for "Article1"
 	Then I should not see "Merge" button
+
