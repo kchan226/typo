@@ -17,6 +17,9 @@ module NavigationHelpers
       '/'
     when /^the new article page$/
       '/admin/content/new'
+    when /^the edit page for "(.*)"$/
+      admin_content_path(action: 'edit', id: Article.find_by_title($1))
+
 
     #added by Wesley
     when /^the edit page for "(.*)"/ 
