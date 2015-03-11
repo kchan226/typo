@@ -466,4 +466,20 @@ class Article < Content
     to = to - 1 # pull off 1 second so we don't overlap onto the next day
     return from..to
   end
+
+  #Added by Wesley
+  def merge(id)
+    begin
+      a = Article.find(id)
+      self.update_attribute(:body, self.body + '\n' + a.body)
+      a.comments.each do |c|
+        new_comment = c.attributes
+        new_comment[:article_id] = self.id
+        self.comments.create!(new_comment)
+      end 
+      true
+    rescue
+      false
+    end
+  end
 end
