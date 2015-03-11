@@ -11,7 +11,7 @@ Background: articles have been added to database
 	And I am on the edit page for "Article1"
 
 Scenario: Admin should see merge option
-	I should see "Merge" button
+	Then I should see "Merge" button
 
 Scenario: the merged article should contain the text and comments of both articles and the title and author of either article
  	And I fill in "Article ID" with Article2 ID"
