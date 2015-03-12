@@ -148,15 +148,17 @@ class Admin::ContentController < Admin::BaseController
     @post_types = PostType.find(:all)
     if request.post?
       #Added by Wesley======
-      if !(params[:merge_with].nil? || params[:merge_with].empty?)
-        if params[:merge_with].to_i == @article.id
-          flash[:error] = "Error, you cannot merge an article with itself."
-        elsif @article.merge(params[:merge_with].to_i)
-          flash[:notice] = 'Article was successfully merged.' if @article.save!
-        else
-          flash[:error] = 'Error, you must input a valid article.'
+      unless @article.access_by? current_user
+        if !(params[:merge_with].nil? || params[:merge_with].empty?)
+          if params[:merge_with].to_i == @article.id
+            flash[:error] = "Error, you cannot merge an article with itself."
+          elsif @article.merge(params[:merge_with].to_i)
+            flash[:notice] = 'Article was successfully merged.' if @article.save!
+          else
+            flash[:error] = 'Error, you must input a valid article.'
+          end
+          return redirect_to :action => 'index'
         end
-        return redirect_to :action => 'index'
       end
       #=====================
       if params[:article][:draft]
