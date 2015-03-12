@@ -1,3 +1,4 @@
+
 Feature: Admin can merge articles
 	As an admin
 	In order to merge similar artciles
@@ -22,12 +23,16 @@ Scenario: the merged article should contain the text and comments of both articl
  	And I should see the author of either "Article1" or "Article2"
 
 Scenario: Admin should not be able to merge an article with non-existing article
- 	And I fill in "Article ID" with Article3 ID"
+ 	And I fill in "Article ID" with "Article3 ID"
  	And I press "Merge"
  	Then I should be on the edit page for "Article1"
  	And I should see "Article does not exist"
 
-
+Scenario: Admin should not be able to merge an article with itself
+	And I feel in "Article ID" with "Article1 ID"
+	And I press "Merge"
+	Then I should be on the edit page for "Article1"
+	And I should see "Article cannot merge with itself"
 
 
 
