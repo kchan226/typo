@@ -416,6 +416,22 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
+   #Added by Wesley
+  def merge(id)
+    begin
+      a = Article.find(id)
+      self.update_attribute(:body, self.body + a.body)
+      a.comments.each do |c|
+        new_comment = c.attributes
+        new_comment[:article_id] = self.id
+        self.comments.create!(new_comment)
+      end 
+      true
+    rescue
+      false
+    end
+  end
+
   protected
 
   def set_published_at
@@ -467,19 +483,4 @@ class Article < Content
     return from..to
   end
 
-  #Added by Wesley
-  def merge(id)
-    begin
-      a = Article.find(id)
-      self.update_attribute(:body, self.body + '\n' + a.body)
-      a.comments.each do |c|
-        new_comment = c.attributes
-        new_comment[:article_id] = self.id
-        self.comments.create!(new_comment)
-      end 
-      true
-    rescue
-      false
-    end
-  end
 end
