@@ -154,7 +154,7 @@ class Admin::ContentController < Admin::BaseController
         elsif @article.merge(params[:merge_with].to_i)
           flash[:notice] = 'Article was successfully merged.' if @article.save!
         else
-          flash[:error] = 'Errorm you must input a valid article.'
+          flash[:error] = 'Error, you must input a valid article.'
         end
         return redirect_to :action => 'index'
       end
