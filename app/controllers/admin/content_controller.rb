@@ -148,7 +148,7 @@ class Admin::ContentController < Admin::BaseController
     @post_types = PostType.find(:all)
     if request.post?
       #Added by Wesley======
-      unless @article.access_by? current_user
+      if current_user.admin?
         if !(params[:merge_with].nil? || params[:merge_with].empty?)
           if params[:merge_with].to_i == @article.id
             flash[:error] = "Error, you cannot merge an article with itself."
