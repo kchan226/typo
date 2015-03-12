@@ -426,6 +426,7 @@ class Article < Content
         new_comment[:article_id] = self.id
         self.comments.create!(new_comment)
       end 
+      a.destroy
       true
     rescue
       false
